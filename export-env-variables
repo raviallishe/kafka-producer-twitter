@@ -1,7 +1,7 @@
 
 export TWITTER_STANDARD_SEARCH_URL="https://api.twitter.com/1.1/search/tweets.json"
 
-export CONSUMER_KEY="O3d7YeEPZz56CL7U6Ss5pyJzh"
-export CONSUMER_SECRET="TdcLkG70M7vN1BkrHQNbP9QHeKBwy4I2Yso4SSKwCI4bXw1glS"
-export TOKEN="3548573954-gC77ml5ChX0hUqQeH1ujwVn5EAzOdiKC0RcQlKx"
-export TOKEN_SECRET="QQBk0soJdVjbC38NX1DZWEKrEMyENumZIQI6ojITiACZE"
+export CONSUMER_KEY="******"
+export CONSUMER_SECRET="******"
+export TOKEN="******"
+export TOKEN_SECRET="******"
