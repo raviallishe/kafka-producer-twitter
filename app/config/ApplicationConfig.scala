@@ -1,31 +1,28 @@
 package config
 
-import javax.inject.{Inject, Singleton}
-import play.api.{Configuration}
+import com.twitter.hbc.httpclient.auth.OAuth1
 
-@Singleton
-class ApplicationConfig @Inject()(implicit val configuration: Configuration) {
+object ApplicationConfig {
 
-
-  val twitterStandardSearchApiUrl = requireProperty("TWITTER_STANDARD_SEARCH_URL")
+  // to-do - put below keys in config
   val twitterResponseTweetCount = 5
-//  val twitterAccessKey = requireProperty("twitter.auth.access.key")
-  val twitterAuthToken = "QQBk0soJdVjbC38NX1DZWEKrEMyENumZIQI6ojITiACZE"
 
+  val twitterAuthToken = "3548573954-gC77ml5ChX0hUqQeH1ujwVn5EAzOdiKC0RcQlKx"
+  val twitterAuthSecret = "QQBk0soJdVjbC38NX1DZWEKrEMyENumZIQI6ojITiACZE"
+  val twitterConsumerKey = "O3d7YeEPZz56CL7U6Ss5pyJzh"
+  val twitterConsumerSecret = "TdcLkG70M7vN1BkrHQNbP9QHeKBwy4I2Yso4SSKwCI4bXw1glS"
 
-//  def readFromConfiguration(name: String): String = {
-//    val value: Option[String] = configuration.get(name)
-//    value match {
-//      case Some(value) => println(">>>>>> value: "+ value ); value
-//      case _ => "not available"
+  val oAuth1 = new OAuth1(
+    twitterConsumerKey,
+    twitterConsumerSecret,
+    twitterAuthToken,
+    twitterAuthSecret)
+
+//  def requireProperty(name: String): String = {
+//    System.getenv(name) match {
+//      case value: String => value
+//      case _ => throw new NoSuchElementException(s"no property set with name $name")
 //    }
 //  }
-
-  def requireProperty(name: String): String = {
-    System.getenv(name) match {
-      case value: String => value
-      case _ => throw new NoSuchElementException(s"no property set with name $name")
-    }
-  }
 
 }

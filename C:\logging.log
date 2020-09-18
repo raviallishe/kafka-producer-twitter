@@ -1,0 +1,4 @@
+2020-09-18 15:55:18 INFO  BasicClient:95 - New connection executed: hosebird-client-0, endpoint: /1.1/statuses/filter.json?delimited=length&stall_warnings=true
+2020-09-18 15:55:18 INFO  ClientBase:173 - hosebird-client-0 Establishing a connection
+2020-09-18 15:55:49 INFO  BasicClient:95 - New connection executed: hosebird-client-0, endpoint: /1.1/statuses/filter.json?delimited=length&stall_warnings=true
+2020-09-18 15:55:49 INFO  ClientBase:173 - hosebird-client-0 Establishing a connection

@@ -1,30 +1,44 @@
 package services
 
-import config.ApplicationConfig
-import javax.inject.Inject
-import play.api.libs.ws.{WSClient, WSRequest, WSResponse}
-import scala.concurrent.ExecutionContext.Implicits.global
+import java.util
+import java.util.Arrays
+import java.util.concurrent.{LinkedBlockingQueue, TimeUnit}
+import authentication.StreamSource
+import org.slf4j.LoggerFactory
+import scala.util.{Failure, Success, Try}
 
-import scala.concurrent.Future
+object TwitterSearchService extends App {
 
-class TwitterSearchService @Inject() (ws: WSClient, properties: ApplicationConfig) {
+  val logger = LoggerFactory.getLogger(TwitterSearchService.getClass.getName)
+  val msgQueue = new LinkedBlockingQueue[String](10)
+
 
   def fetchTweets(keyword: String) = {
+    val terms: util.List[String] = Arrays.asList(keyword)
+    val hosebirdClient = StreamSource.createTwitterClient(msgQueue, terms)
+    hosebirdClient.connect()
 
-    val twitterUrl = properties.twitterStandardSearchApiUrl + s"?q=$keyword" +
-      s"&count=${properties.twitterResponseTweetCount}&result_type=mixed"
+    while (!(hosebirdClient.isDone)) {
 
-    val headers = ("Authorization", s"Bearer ${properties.twitterAuthToken}")
+      Try {
+        msgQueue.poll(5, TimeUnit.SECONDS)
+      } match {
+        case Success(value) if value.nonEmpty => {
+          println(">>>>tweet: " + value)
+          logger.info(">>>>log tweet: " + value)
+        }
+        case Failure(exception) => {
+          println(">>>>>>: Exception")
+          logger.warn(">>>>>>: log Exception")
+          hosebirdClient.stop()
+        }
+      }
+    }
 
-    var wsRequest: WSRequest = ws.url(twitterUrl)
-    wsRequest = wsRequest.withHttpHeaders(headers)
-
-    val response: Future[WSResponse] = wsRequest.get()
-
-    response.map(res => println(">>>>> "+ res))
-
-    response
-
+    println(">>>>>>: end of streaming")
+    logger.info(">>>>>>: log end of streaming")
 
   }
+
+  fetchTweets("modi")
 }

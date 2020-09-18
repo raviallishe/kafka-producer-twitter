@@ -12,7 +12,11 @@ libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0
 libraryDependencies ++= Seq("org.typelevel" %% "cats-core" % "2.0.0",
   ws,
   "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2",
-  "org.apache.kafka" % "kafka-clients" % "2.0.0")
+  "com.twitter" % "hbc-core" % "2.2.0",
+  "org.apache.kafka" % "kafka-clients" % "2.0.0",
+  "org.apache.kafka" % "kafka-streams" % "0.10.0.0",
+  "org.slf4j" % "slf4j-log4j12" % "1.7.25" % Test
+)
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "kafka.controllers._"
