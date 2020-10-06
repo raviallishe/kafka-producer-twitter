@@ -5,7 +5,7 @@ import java.util.Properties
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 import org.apache.kafka.clients.producer.ProducerConfig._
 
-object Producer {
+object KafkaProducer {
 
   val server = "localhost:9092"
   val properties = new Properties()
